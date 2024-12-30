@@ -91,13 +91,18 @@ public class FlameEffects
             {
                 if(entity instanceof AbstractArrow arrow)
                 {
-                    if(tickCount % 10 == 0 && !arrow.onGround())
+                    if(tickCount % 10 == 0 && arrow.isAlive() && !arrow.onGround())
                         level.addParticle(ParticleTypes.LAVA, entity.position().x, entity.position().y, entity.position().z, 0.0D, 0.0D, 0.0D);
                 }
             }
         }
 
     }
+
+    //////      FIXED PARTICLES SPAWNING AFTER PICKUP       //////
+            //////      STILL NEED TO FIX       //////
+        /// PARTICLES ONLY SPAWNING AFTER ARROWLOOSE
+        /// PARTICLES STILL SPAWNING ON GROUND
 
     @SubscribeEvent
     public static void getPlayerPos(ArrowLooseEvent event)

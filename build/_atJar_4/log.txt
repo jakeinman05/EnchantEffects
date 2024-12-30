@@ -1,7 +1,7 @@
-Java Launcher: /Users/jakeinman/.gradle/jdks/eclipse_adoptium-17-aarch64-os_x.2/jdk-17.0.13+11/Contents/Home/bin/java
-Arguments: '--inJar, /Users/jakeinman/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.22/forge-1.20.1-47.3.22-injected.jar, --outJar, /Users/jakeinman/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.22_mapped_official_1.20.1/forge-1.20.1-47.3.22_mapped_official_1.20.1.jar, --logFile, accesstransform.log, --atFile, /Users/jakeinman/Desktop/moders/build/_atJar_4/parent_at.cfg'
+Java Launcher: C:\Program Files\Java\jdk-17\bin\java.exe
+Arguments: '--inJar, C:\Users\jakei\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.20.1-47.3.22\forge-1.20.1-47.3.22-injected.jar, --outJar, C:\Users\jakei\.gradle\caches\forge_gradle\minecraft_user_repo\net\minecraftforge\forge\1.20.1-47.3.22_mapped_official_1.20.1\forge-1.20.1-47.3.22_mapped_official_1.20.1.jar, --logFile, accesstransform.log, --atFile, C:\Users\jakei\Desktop\EnchantEffects\build\_atJar_4\parent_at.cfg'
 Classpath:
- - /Users/jakeinman/.gradle/caches/forge_gradle/maven_downloader/net/minecraftforge/accesstransformers/8.2.0/accesstransformers-8.2.0-fatjar.jar
-Working directory: /Users/jakeinman/Desktop/moders/build/_atJar_4
+ - C:\Users\jakei\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\accesstransformers\8.2.1\accesstransformers-8.2.1-fatjar.jar
+Working directory: C:\Users\jakei\Desktop\EnchantEffects\build\_atJar_4
 Main class: net.minecraftforge.accesstransformer.TransformerProcessor
 ====================================
