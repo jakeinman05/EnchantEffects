@@ -20,7 +20,7 @@ import static com.notvergin.modname.main.MODID;
 public class FlameEffects
 {
     static int tickCount = 0;
-    private static Set<AbstractArrow> flyingArrows = new HashSet<>();
+    private static final Set<AbstractArrow> flyingArrows = new HashSet<>();
 
     @SubscribeEvent
     protected static void onArrowHit(ProjectileImpactEvent event)
@@ -33,10 +33,7 @@ public class FlameEffects
 
             Level level = arrow.level();
             // particle effects
-            if(arrow.isCritArrow())
-                particleEffect(level, arrow, true);
-            else
-                particleEffect(level, arrow, false);
+            particleEffect(level, arrow, arrow.isCritArrow());
         }
     }
 
@@ -59,7 +56,7 @@ public class FlameEffects
                 if(arrow.isAlive() && arrow.isOnFire())
                 {
                     // particle in air every 5 ticks
-                    if(tickCount % 5 == 0)
+                    if(tickCount % 3 == 0)
                         event.level.addParticle(ParticleTypes.LAVA, arrow.position().x, arrow.position().y, arrow.position().z, 0.0D, 0.0D, 0.0D);
                 }
             }
@@ -88,12 +85,12 @@ public class FlameEffects
         if(isCrit)
         {
             for(int i = 0; i < 5 * arrow.getBaseDamage(); ++i)
-                level.addParticle(ParticleTypes.LAVA, arrow.getRandomX((double)0.5F), arrow.getRandomY(), arrow.getRandomZ((double)0.5F), R, G, B);
+                level.addParticle(ParticleTypes.LAVA, arrow.getRandomX(0.5F), arrow.getRandomY(), arrow.getRandomZ(0.5F), R, G, B);
         }
         else
         {
             for(int i = 0; i < 5; ++i)
-                level.addParticle(ParticleTypes.LAVA, arrow.getRandomX((double)0.5F), arrow.getRandomY(), arrow.getRandomZ((double)0.5F), R, G, B);
+                level.addParticle(ParticleTypes.LAVA, arrow.getRandomX(0.5F), arrow.getRandomY(), arrow.getRandomZ(0.5F), R, G, B);
         }
     }
 
