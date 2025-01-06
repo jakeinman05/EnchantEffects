@@ -102,7 +102,7 @@ public class FlameEffects
             {
                 if(powerLevel > 0)
                 {
-                    for(int i=0; i<6 * powerLevel+1; i++)
+                    for(int i=0; i<6 * powerLevel; i++)
                     {
                         Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.LAVA, hitEntity.getRandomX(0.5F), arrow.getY()-.5, hitEntity.getRandomZ(0.5F), 0, 0, 0);
                     }
