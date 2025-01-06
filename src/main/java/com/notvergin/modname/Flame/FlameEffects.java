@@ -1,12 +1,22 @@
 package com.notvergin.modname.Flame;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -56,7 +66,7 @@ public class FlameEffects
                 if(arrow.isAlive() && arrow.isOnFire())
                 {
                     // particle in air every 5 ticks
-                    if(tickCount % 3 == 0)
+                    if(tickCount % 5 == 0)
                         event.level.addParticle(ParticleTypes.LAVA, arrow.position().x, arrow.position().y, arrow.position().z, 0.0D, 0.0D, 0.0D);
                 }
             }
@@ -75,6 +85,43 @@ public class FlameEffects
         }
     }
 
+    @SubscribeEvent
+    protected static void entityParticles(LivingHurtEvent event)
+    {
+        Entity hitEntity = event.getEntity();
+        int powerLevel = 0;
+        Entity sourceEntity = event.getSource().getEntity();
+
+        if(sourceEntity instanceof Player player)
+        {
+            ItemStack bow = player.getMainHandItem();
+            powerLevel = bow.getEnchantmentLevel(Enchantments.POWER_ARROWS);
+        }
+
+        Entity dirSource = event.getSource().getDirectEntity();
+
+        if(dirSource instanceof AbstractArrow arrow)
+        {
+            if(arrow.isOnFire())
+            {
+                if(powerLevel > 0)
+                {
+                    for(int i=0; i<6 * powerLevel+1; i++)
+                    {
+                        Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.LAVA, hitEntity.getRandomX(0.5F), arrow.getY()-.5, hitEntity.getRandomZ(0.5F), 0, 0, 0);
+                    }
+                }
+                else
+                {
+                    for(int i=0; i<6; i++)
+                    {
+                        Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.LAVA, hitEntity.getRandomX(0.5F), arrow.getY()-.5, hitEntity.getRandomZ(0.5F), 0, 0, 0);
+                    }
+                }
+            }
+        }
+    }
+
     protected static void particleEffect(Level level, AbstractArrow arrow, boolean isCrit)
     {
         int $$1 = -1;
@@ -84,12 +131,12 @@ public class FlameEffects
 
         if(isCrit)
         {
-            for(int i = 0; i < 5 * arrow.getBaseDamage(); ++i)
+            for(int i = 0; i < 5; ++i)
                 level.addParticle(ParticleTypes.LAVA, arrow.getRandomX(0.5F), arrow.getRandomY(), arrow.getRandomZ(0.5F), R, G, B);
         }
         else
         {
-            for(int i = 0; i < 5; ++i)
+            for(int i = 0; i < 3; ++i)
                 level.addParticle(ParticleTypes.LAVA, arrow.getRandomX(0.5F), arrow.getRandomY(), arrow.getRandomZ(0.5F), R, G, B);
         }
     }
